@@ -25,10 +25,12 @@ runs:
         echo "image-name:"    ${{ inputs.image-name }}
         echo "image-version:" ${{ inputs.image-version }}
         echo "dockerfile-path:" ${{ inputs.dockerfile-path }}
+      shell: bash
 
     - uses: actions/checkout@v2
 
     - name: Build docker image 
       run: docker build ${{ inputs.dockerfile-path }} ${{ inputs.image-name }}:${{ inputs.image-version }}
+      shell: bash
 
 
