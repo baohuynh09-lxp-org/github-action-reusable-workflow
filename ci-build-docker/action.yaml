@@ -30,7 +30,7 @@ runs:
     - uses: actions/checkout@v2
 
     - name: Build docker image 
-      run: docker build ${{ inputs.dockerfile-path }} ${{ inputs.image-name }}:${{ inputs.image-version }}
+      run: docker build ${{ inputs.dockerfile-path }} -t ${{ inputs.image-name }}:${{ inputs.image-version }}
       shell: bash
 
 
