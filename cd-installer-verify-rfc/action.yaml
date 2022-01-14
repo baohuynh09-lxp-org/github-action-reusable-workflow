@@ -10,7 +10,7 @@ runs:
     - name: Verifying RFC ticket 
       run: |
         JIRA_USER="long.diep@leap.expert"
-        STATUS=$(curl --user $JIRA_USER:$JIRA_TOKEN \
+        STATUS=$(curl --user $JIRA_USER:${{ secrets.JIRA_TOKEN }} \
           -H "Content-Type: application/json" \
           https://leap-expert.atlassian.net/rest/api/2/issue/${{ inputs.RW_RFC_TICKET_ID }} | jq -r '.fields.status.id')
         if [ $STATUS -ne "10268" ]; then exit 1; fi
