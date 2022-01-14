@@ -9,9 +9,6 @@ runs:
   steps: 
     - name: Verifying RFC ticket 
       run: |
-        #JIRA_USER=$(cat jira_user.txt)
-        #JIRA_TOKEN=$(cat jira_token.txt)
-
         JIRA_USER="long.diep@leap.expert"
         STATUS=$(curl --user $JIRA_USER:$JIRA_TOKEN \
           -H "Content-Type: application/json" \
