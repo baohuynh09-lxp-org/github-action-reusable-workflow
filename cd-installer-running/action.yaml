@@ -1,0 +1,20 @@
+name: Reusable workflow - Continuous Delivery FMOP with Installer
+inputs:
+  RW_INSTALLER_DOCKER_TAG:
+    description: "FMOP Instlaler image version"
+    required: true
+  RW_INSTALLER_RUN_MODE:
+    description: "Mode to run Installer (install/upgrade)"
+    required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Running Installer (install/upgrade)
+      run: |
+        if [[ ${{ input.RW_INSTALLER_RUN_MODE }} == "install" ]];
+          .github/scripts/installer_fresh_install.sh ${{ input.RW_INSTALLER_DOCKER_TAG }}
+        else
+          .github/scripts/installer_upgrade_FMOP.sh ${{ input.RW_INSTALLER_DOCKER_TAG }}
+        fi
+      shell: bash

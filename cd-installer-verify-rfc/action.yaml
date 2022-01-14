@@ -1,0 +1,21 @@
+name: Reusable workflow - Verify RFC Ticket (approve/pending)
+inputs:
+  RW_RFC_TICKET_ID:
+    description: "RFC Ticket ID"
+    required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Verifying RFC ticket 
+      run: |
+        #JIRA_USER=$(cat jira_user.txt)
+        #JIRA_TOKEN=$(cat jira_token.txt)
+
+        JIRA_USER="long.diep@leap.expert"
+        STATUS=$(curl --user $JIRA_USER:$JIRA_TOKEN \
+          -H "Content-Type: application/json" \
+          https://leap-expert.atlassian.net/rest/api/2/issue/${{ inputs.RFC_TICKET_ID }} | jq -r '.fields.status.id')
+        #10268 = "approve" status
+        if [ $STATUS -ne "10268" ]; then exit 1; fi
+      shell: bash

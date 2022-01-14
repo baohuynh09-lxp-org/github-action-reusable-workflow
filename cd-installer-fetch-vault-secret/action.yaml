@@ -1,0 +1,13 @@
+name: Reusable workflow - Fetching CD credentials from Vault
+inputs:
+  RW_VAULT_CLIENT_TOKEN: 
+    description: "Vault client token for CD to access Vault during runtime"
+    required: true
+
+runs:
+  using: "composite"
+  steps: 
+    - name: Fetching CD's secrets from Vault
+      run: |
+        echo "fetching CD secrets"
+      shell: bash
